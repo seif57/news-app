@@ -21,6 +21,7 @@ function CardList({ data }) {
                             description={data[i].description}
                             author={data[i].author === null ? "unkonwn" : data[i].author}
                             articleUrl={data[i].url}
+                            buttonTitle={"Add To"}
                         />
                     })
                 }

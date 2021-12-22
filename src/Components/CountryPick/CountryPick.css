@@ -21,7 +21,7 @@ background-size:16px 16px;
     align-items: center;
 }
 
-.button__left,.button__right {
+.button__left,.button__right,.button__middle {
     padding: 15px 25px;
     font-size: 24px;
     cursor: pointer;
@@ -47,6 +47,9 @@ background-size:16px 16px;
 
 
 }
-.button__right{
+.button__middle{
 background: #57886c;
+}
+.button__right{
+    background: #17141d;
 }

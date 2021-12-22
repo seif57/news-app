@@ -1,7 +1,7 @@
 import React from 'react';
 import "./CountryPick.css"
 
-function CountryPick({ onButtonClick,name }) {
+function CountryPick({ onButtonClick,name,onFavouriteSelect }) {
     return (
         <div className="center">
             <div className="countrypick__top">
@@ -18,7 +18,12 @@ function CountryPick({ onButtonClick,name }) {
                 >Egypt</button>
                 <button
                     onClick={onButtonClick}
-                    className="button__right">UAE</button>
+                    className="button__middle">UAE</button>
+                    <button
+                    className='button__right'
+                    onClick={onFavouriteSelect}
+                    >Favourites
+                    </button>
             </div>
         </div>
     )

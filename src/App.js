@@ -23,7 +23,7 @@ const Header = () => {
   );
 };
 const initialState = {
-
+  
   news: [],
   route: 'signin',
   isSignedIn: false,
@@ -59,7 +59,18 @@ class App extends Component {
       .then(console.log)
   }
 
-
+ onFavouriteSelect=()=>{
+   fetch('http://localhost:3000/favourites',{
+    method:'post',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+        id:this.state.user.id
+    })
+   })
+   .then(response=>response.json())
+   .then(data=>this.setState({news:data}))
+   
+ }
 
   onButtonClick = (event) => {
     let country = event.target.innerHTML;
@@ -70,7 +81,7 @@ class App extends Component {
     let url = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=86c67467a1b04994a9348d33718410ea`
     fetch(url)
       .then(response => response.json())
-      .then(data => this.setState({ news: data }));
+      .then(data => this.setState({ news: data.articles }));
 
   }
 
@@ -84,7 +95,7 @@ class App extends Component {
   }
 
   render() {
-    const articles = this.state.news.articles;
+    const {news}=this.state
     return (
       <AnimatePresence exitBeforeEnter>
         <div className="app">
@@ -95,10 +106,15 @@ class App extends Component {
               <Logo />
               <CountryPick
                 name={this.state.user.name}
-                onButtonClick={this.onButtonClick} />
+                onButtonClick={this.onButtonClick}
+                onFavouriteSelect={this.onFavouriteSelect}
+                />
+                
               {
-                articles ? <CardList data={articles} /> : ' Please Choose a Country To Browse The News'
+                news ? <CardList data={news}/> :  "Please Press Any Button"
+                
               }
+              
             </div>
 
             : (

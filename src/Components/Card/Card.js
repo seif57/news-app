@@ -1,27 +1,7 @@
 import React from 'react';
 import "./Card.css";
-
-class Card extends React.Component {
-    constructor(props){
-        super(props);
-        this.state={
-            liked:false,
-            title:'',
-            description:'',
-            author:'',
-            articleUrl:'',
-        }
-        this.handleClick = this.handleClick.bind(this);
-
-    }
-    handleClick() {
-        this.setState({
-          liked: !this.state.liked
-        });
-      }
-    render(){
-        const{title,description,author,articleUrl}=this.props
-        const text = this.state.liked ? 'Unlike' : 'Like'
+function Card({title,description,author,articleUrl,buttonTitle}) {
+        
         return (
             <div className="card">
                 <header className="card-header">
@@ -32,9 +12,9 @@ class Card extends React.Component {
     
                         <div className="button__group">
                             <button
-                            onClick={this.handleClick}
+                           
                              className='like__button'>
-                                {text}
+                                {buttonTitle}
                             </button>
                             <button className='button'>
                                 <a rel="noreferrer" target="_blank" href={articleUrl}>Read More</a>
@@ -48,8 +28,6 @@ class Card extends React.Component {
                 </header>
             </div>
         )
-    }
-    
 }
 
 export default Card
