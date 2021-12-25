@@ -5,13 +5,11 @@ import { motion } from 'framer-motion';
 
 
 class CardList extends React.Component {
-   
-
-
+        
     render() {
-        const { data, isFavourite } = this.props
+        const { data, isFavourite,isReady } = this.props
         return (
-            <motion.div
+            isReady?<motion.div
                 initial={{ x: -500 }}
                 animate={{ x: -10 }}
                 transition={{ duration: 1 }}
@@ -35,8 +33,8 @@ class CardList extends React.Component {
                     }
 
                 </div>
-            </motion.div>
-
+            </motion.div>:
+            ''
         )
     }
 

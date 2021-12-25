@@ -6,7 +6,6 @@ import "./Card.css";
 
 function Card({title,description,author,articleUrl,buttonTitle,userid,articleid}) {
 
-    
     function  onCategory(event) {
         let cardButton= event.target.innerHTML;
         if (cardButton==="Add To") {
@@ -31,7 +30,10 @@ function Card({title,description,author,articleUrl,buttonTitle,userid,articleid}
                     id: articleid
                 })
             })
-            .then(response=>alert('Article Deleted'))
+            .then(response=>{
+                alert('Article Deleted');
+                
+            })
 
         }
             

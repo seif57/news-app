@@ -23,6 +23,7 @@ const Header = () => {
   );
 };
 const initialState = {
+  isReady: false,
   isFavourite: false,
   news: [],
   route: 'signin',
@@ -69,7 +70,7 @@ class App extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({news: data, isFavourite: true })
+        this.setState({news: data, isFavourite: true, isReady: true })
       })
 
   }
@@ -85,7 +86,8 @@ class App extends Component {
       .then(response => response.json())
       .then(data => this.setState({
         news: data.articles,
-        isFavourite: false
+        isFavourite: false,
+        isReady: true
       }));
 
   }
@@ -117,6 +119,7 @@ class App extends Component {
 
               {
                 news ? <CardList
+                  isReady={this.state.isReady}
                   isFavourite={this.state.isFavourite}
                   data={news}
                   id={this.state.user.id}
