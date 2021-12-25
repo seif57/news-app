@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 
 
 class CardList extends React.Component {
-        
+    
     render() {
-        const { data, isFavourite,isReady } = this.props
+        const { data, isFavourite,isReady,onFavouriteSelect } = this.props
         return (
             isReady?<motion.div
                 initial={{ x: -500 }}
@@ -19,6 +19,7 @@ class CardList extends React.Component {
                         data.map((item, i) => {
                             return <Card
                                 key={i}
+                                reCardList={onFavouriteSelect}
                                 articleid={data[i].article_id}
                                 userid={this.props.id}
                                 title={data[i].title}

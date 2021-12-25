@@ -119,6 +119,7 @@ class App extends Component {
 
               {
                 news ? <CardList
+                  onFavouriteSelect={this.onFavouriteSelect}
                   isReady={this.state.isReady}
                   isFavourite={this.state.isFavourite}
                   data={news}

@@ -4,7 +4,7 @@ import "./Card.css";
 
 
 
-function Card({title,description,author,articleUrl,buttonTitle,userid,articleid}) {
+function Card({title,description,author,articleUrl,buttonTitle,userid,articleid, reCardList}) {
 
     function  onCategory(event) {
         let cardButton= event.target.innerHTML;
@@ -32,7 +32,7 @@ function Card({title,description,author,articleUrl,buttonTitle,userid,articleid}
             })
             .then(response=>{
                 alert('Article Deleted');
-                
+                reCardList();
             })
 
         }
