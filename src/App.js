@@ -23,7 +23,7 @@ const Header = () => {
   );
 };
 const initialState = {
-  
+  isFavourite: false,
   news: [],
   route: 'signin',
   isSignedIn: false,
@@ -59,18 +59,20 @@ class App extends Component {
       .then(console.log)
   }
 
- onFavouriteSelect=()=>{
-   fetch('http://localhost:3000/favourites',{
-    method:'post',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-        id:this.state.user.id
+  onFavouriteSelect = () => {
+    fetch('http://localhost:3000/favourites', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: this.state.user.id
+      })
     })
-   })
-   .then(response=>response.json())
-   .then(data=>this.setState({news:data}))
-   
- }
+      .then(response => response.json())
+      .then(data => {
+        this.setState({news: data, isFavourite: true })
+      })
+
+  }
 
   onButtonClick = (event) => {
     let country = event.target.innerHTML;
@@ -81,7 +83,10 @@ class App extends Component {
     let url = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=86c67467a1b04994a9348d33718410ea`
     fetch(url)
       .then(response => response.json())
-      .then(data => this.setState({ news: data.articles }));
+      .then(data => this.setState({
+        news: data.articles,
+        isFavourite: false
+      }));
 
   }
 
@@ -95,7 +100,7 @@ class App extends Component {
   }
 
   render() {
-    const {news}=this.state
+    const { news } = this.state
     return (
       <AnimatePresence exitBeforeEnter>
         <div className="app">
@@ -108,13 +113,18 @@ class App extends Component {
                 name={this.state.user.name}
                 onButtonClick={this.onButtonClick}
                 onFavouriteSelect={this.onFavouriteSelect}
-                />
-                
+              />
+
               {
-                news ? <CardList data={news}/> :  "Please Press Any Button"
-                
+                news ? <CardList
+                  isFavourite={this.state.isFavourite}
+                  data={news}
+                  id={this.state.user.id}
+                />
+                  : "Please Press Any Button"
+
               }
-              
+
             </div>
 
             : (
